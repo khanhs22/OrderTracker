@@ -13,25 +13,24 @@ jobs:
     
     strategy:
       matrix:
-        # Chạy song song trên cả 3 hệ điều hành phổ biến nhất
+        # Chạy song song trên cả 3 hệ điều hành
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - name: Checkout mã nguồn
       uses: actions/checkout@v4
 
-    - name: Cài đặt môi trường C++ & Chạy CMake
-      uses: threeal/cmake-action@v1.3.0
-      
-    # Tự động cài đặt Qt 6 tương ứng cho từng hệ điều hành
+    # BƯỚC 1: Phải cài đặt Qt 6 trước để hệ thống nạp các biến môi trường CMAKE_PREFIX_PATH
     - name: Cài đặt bộ thư viện Qt 6
       uses: jurplel/install-qt-action@v3
       with:
-        version: '6.5.3' # Bản LTS ổn định cao
+        version: '6.5.3' # Phiên bản LTS cực kỳ ổn định
         modules: 'qtnetwork qtsql'
 
-    - name: Tạo thư mục Build
+    # BƯỚC 2: Khi đã có Qt 6, tiến hành cấu hình CMake cấu trúc dự án
+    - name: Tạo thư mục Build và Cấu hình CMake
       run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
+    # BƯỚC 3: Tiến hành Biên dịch ra sản phẩm đóng gói
     - name: Tiến hành Biên dịch (Compile)
       run: cmake --build build --config Release
