@@ -33,3 +33,11 @@ jobs:
     # BƯỚC 3: Tiến hành Biên dịch ra sản phẩm đóng gói
     - name: Tiến hành Biên dịch (Compile)
       run: cmake --build build --config Release
+
+
+    # BƯỚC 4: Tạo file nén chứa sản phẩm đóng gói để dễ dàng tải về
+    - name: Lưu trữ sản phẩm đóng gói (Artifacts)
+      uses: actions/upload-artifact@v4
+      with:
+        name: OrderTracker-${{ matrix.os }}
+        path: build/ # Hoặc đường dẫn đến file thực thi sau khi buildß
