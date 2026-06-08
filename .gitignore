@@ -1,0 +1,19 @@
+# macOS system files
+.DS_Store
+
+# CMake temporary files and directories
+/build/
+/.cmake/
+/CMakePresets.json
+
+# Qt Creator user specific files
+CMakeLists.txt.user*
+
+# C++ compiled files
+*.o
+*.a
+*.so
+*.dylib
+
+# Local Database (Khng y file data chy th  my ln)
+*.db
